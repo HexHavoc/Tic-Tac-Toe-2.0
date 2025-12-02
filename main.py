@@ -20,10 +20,67 @@ class TicTacToe:
         print(f"""
                 ___________________
                 |  {self.character_list[0][0]}  |  {self.character_list[0][1]}  |  {self.character_list[0][2]}  |   
+                ___________________
                 |  {self.character_list[1][0]}  |  {self.character_list[1][1]}  |  {self.character_list[1][2]}  |   
+                ___________________
                 |  {self.character_list[2][0]}  |  {self.character_list[2][1]}  |  {self.character_list[2][2]}  |
                 ___________________
             """)
+        
+    
+        
+
+    def same_kind(self,row,col):
+
+        if(self.character_list[2][0] == "X" or self.character_list[1][1] == "X" or self.character_list[0][2] == "X"
+           or self.character_list[2][0] == "O" or self.character_list[1][1] == "O" or self.character_list[0][2] == "O"):
+            if(self.character_list[2][0] == self.character_list[1][1] == self.character_list[0][2]):
+                    player = self.character_list[2][0]
+                    self.character_list[2][0] = "-"
+                    self.character_list[1][1] = "-"
+                    self.character_list[0][2] = "-"
+                    self.print_board()
+                    print(f"Player {player} WINS THE GAME!!")
+
+        elif(self.character_list[row][0] == self.character_list[row][1] == self.character_list[row][2]):
+            player = self.character_list[row][0]
+            self.character_list[row][0] = "-"
+            self.character_list[row][1] = "-"
+            self.character_list[row][2] = "-"
+            self.print_board()
+            print(f"Player {player} WINS THE GAME!!")
+
+        elif(self.character_list[0][0] == "X" or self.character_list[1][1] == "X" or self.character_list[2][2] == "X"
+             or self.character_list[0][0] == "O" or self.character_list[1][1] == "O" or self.character_list[2][2] == "O"):
+            if(self.character_list[0][0] == self.character_list[1][1] == self.character_list[2][2]):
+                    player = self.character_list[0][0]
+                    self.character_list[0][0] = "-"
+                    self.character_list[1][1] = "-"
+                    self.character_list[2][2] = "-"
+                    self.print_board()
+                    print(f"Player {player} WINS THE GAME!!")
+
+
+
+        elif(self.character_list[0][col] == self.character_list[1][col] == self.character_list[2][col]):
+            player = self.character_list[0][col]
+            self.character_list[0][col] = "|"
+            self.character_list[1][col] = "|"
+            self.character_list[2][col] = "|"
+            self.print_board()
+            print(f"Player {player} WINS THE GAME!!")
+
+        
+        elif(self.character_list[row][0] == self.character_list[row][1] == self.character_list[row][2]):
+            player = self.character_list[row][0]
+            self.character_list[row][0] = "-"
+            self.character_list[row][1] = "-"
+            self.character_list[row][2] = "-"
+            self.print_board()
+            print(f"Player {player} WINS THE GAME!!")
+
+
+
         
         
 
@@ -33,12 +90,13 @@ class TicTacToe:
             x_pos_row = int(input("Player X enter the row for your X: "))
             x_pos_col = int(input("Player X enter the column for your X: "))
             if(self.character_list[x_pos_row - 1][x_pos_col - 1] == "X" or self.character_list[x_pos_row - 1][x_pos_col - 1] == "O"):
-                print(f"THERES ALREADY A {self.character_list[x_pos_row][x_pos_col]} THERE!!")
+                print(f"THERES ALREADY A {self.character_list[x_pos_row - 1][x_pos_col - 1]} THERE!!")
 
             else:
                 self.character_list[x_pos_row - 1][x_pos_col - 1] = "X"
+                self.same_kind(x_pos_row - 1, x_pos_col - 1)
                 self.print_board()
-                self.turn = False
+                
 
 
         else:
@@ -47,10 +105,11 @@ class TicTacToe:
 
 
             if(self.character_list[o_pos_row - 1][o_pos_col - 1] == "O" or self.character_list[o_pos_row - 1][o_pos_col - 1] == "X"):
-                print(f"THERES ALREADY A {self.character_list[o_pos_row][o_pos_col]} THERE!!")
+                print(f"THERES ALREADY A {self.character_list[o_pos_row - 1][o_pos_col - 1]} THERE!!")
 
             else:
                 self.character_list[o_pos_row - 1][o_pos_col - 1] = "O"
+                self.same_kind(o_pos_row - 1, o_pos_col - 1)
                 self.print_board()
                 self.turn = True
         
